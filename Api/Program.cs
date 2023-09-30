@@ -56,8 +56,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuerSigningKey = true,
             // mã đăng ký nhà phát hành dựa vào JWT:Key
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"])),
+            ValidIssuer = builder.Configuration["JWT:Issuer"],
             ValidateIssuer = true,
-            ValidateAudience = true
+            ValidateAudience = false
         };
     });
 var app = builder.Build();

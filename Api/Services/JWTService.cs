@@ -30,7 +30,7 @@ namespace Api.Services
                 new Claim(ClaimTypes.Surname, user.LastName)
             };
 
-            var creadenials = new SigningCredentials(_jwtKey, SecurityAlgorithms.HmacSha256);
+            var creadenials = new SigningCredentials(_jwtKey, SecurityAlgorithms.HmacSha512Signature);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(userClaims),
@@ -40,7 +40,6 @@ namespace Api.Services
             };
             var tokenHandler = new JwtSecurityTokenHandler();
             var jwt = tokenHandler.CreateToken(tokenDescriptor);
-
             return tokenHandler.WriteToken(jwt);
         }
     }

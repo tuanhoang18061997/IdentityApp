@@ -27,12 +27,10 @@ namespace Api.Controllers
         }
 
         [Authorize]
-        [AllowAnonymous]
         [HttpGet("refresh-user-token")]
         public async Task<ActionResult<UserDto>> RefreshUserToken()
         {
-
-            var user = await _userManager.FindByEmailAsync(User.FindFirst(ClaimTypes.Email)?.Value);
+            var user = await _userManager.FindByNameAsync(User.FindFirst(ClaimTypes.Email)?.Value);
             return CreateApplicationUserDto(user);
         }
 
