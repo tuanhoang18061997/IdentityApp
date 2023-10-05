@@ -17,6 +17,7 @@ namespace Api.Services
         public JWTService(IConfiguration config)
         {
             _config = config;
+            // _jwtKey dùng để mã hóa và giải mã token
             _jwtKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:Key"]));
         }
         public string CreateJWT(User user)
@@ -29,14 +30,13 @@ namespace Api.Services
                 new Claim(ClaimTypes.GivenName, user.FirstName),
                 new Claim(ClaimTypes.Surname, user.LastName)
             };
-
-            var creadenials = new SigningCredentials(_jwtKey, SecurityAlgorithms.HmacSha512Signature);
+            var creadentials = new SigningCredentials(_jwtKey, SecurityAlgorithms.HmacSha512Signature);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(userClaims),
                 Expires = DateTime.UtcNow.AddDays(int.Parse(_config["JWT:ExpiresInDays"])),
-                SigningCredentials = creadenials,
-                Issuer = _config["JWT: Issuer"]
+                SigningCredentials = creadentials,
+                Issuer = _config["JWT:Issuer"]
             };
             var tokenHandler = new JwtSecurityTokenHandler();
             var jwt = tokenHandler.CreateToken(tokenDescriptor);
