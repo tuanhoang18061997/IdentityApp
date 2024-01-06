@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+
+// Your variable overrides go here, e.g.:
+// $h1-font-size: 3rem;
+
+@import "node_modules/bootswatch/dist/minty/variables";
+@import "node_modules/bootstrap/scss/bootstrap";
+@import "node_modules/bootswatch/dist/minty/bootswatch";
+/* Importing Bootstrap SCSS file. */
+// @import "./node_modules/bootstrap/scss/bootstrap";
+
+/* Importing Datepicker SCSS file. */
+@import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
